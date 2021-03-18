@@ -5,8 +5,6 @@ import Admin from './Admin';
 import Manager from './Manager';
 import User from './User';
 
-
-
 function App() {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
