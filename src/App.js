@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, Redirect, useHistory, BrowserRouter as Router } from 'react-router-dom';
 import Login from './Login';
 import Admin from './Admin';
 import Manager from './Manager';
 import User from './User';
 
 function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleLogin = (user) => {
+  const handleResponseSuccess = (userInfo) => {
+    setUser(userInfo);
     setIsLoggedIn(true);
-    setUser(user);
+  }
+
+  const handleLogout = () => {
+    setUser(null);
+    setIsLoggedIn(false);
   }
 
   if (!isLoggedIn) {
-    return <Login handleLogin={handleLogin}/>
+    return <Login handleResponseSuccess={handleResponseSuccess}/>
   } else {
     switch (user.role) {
       case 'admin': 
@@ -26,13 +31,51 @@ function App() {
         return <User user={user} />;
     }
   }
+
   // return (
   //   <div className="App">
   //     <Router>
-  //       <Route exact path="/" component={Login} />
-  //       <Route path="/admin" component={Admin} /> 
-  //       <Route path="/manager" component={Manager} />
-  //       <Route path="/user/:id" component={User} />
+  //       <Route
+  //         exact path='/login'
+  //         render={() => (
+  //           <Login handleResponseSuccess={handleResponseSuccess} />
+  //         )}
+  //       />
+  //       <Route
+  //         exact path='/admin'
+  //         render={() => (
+  //           <Admin user={user} handleLogout={handleLogout} />
+  //         )}
+  //       />
+  //       <Route
+  //         exact path='/manager'
+  //         render={() => (
+  //           <Manager user={user} handleLogout={handleLogout} />
+  //         )}
+  //       />
+  //       <Route
+  //         exact path='/user'
+  //         render={() => (
+  //           <User user={user} handleLogout={handleLogout} />
+  //         )}
+  //       />
+  //       <Route
+  //         path='/'
+  //         render={() => {
+  //           if (!isLoggedIn) {
+  //             return <Redirect to='/login' />
+  //           } else {
+  //             switch (user.role) {
+  //               case 'admin': 
+  //                 return <Redirect to='/admin' />
+  //               case 'manager':
+  //                 return <Redirect to='/manager' />
+  //               case 'user':
+  //                 return <Redirect to='/user' />
+  //             }
+  //           }
+  //         }}
+  //       />
   //     </Router>
   //   </div>
   // );

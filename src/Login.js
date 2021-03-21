@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import Admin from './Admin';
 
 //테스트용 유저 데이터베이스
 //실제로는 서버에서 유저 데이터베이스를 읽어옴(현재 진행 중인 진단 유저 데이터 & 마스터 데이터)
@@ -12,33 +14,20 @@ import axios from 'axios';
 //     ]
 
 function Login (props) {
-    const [users, setUsers] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                setError(null);
-                setUsers(null);
-                setLoading(true);
-                const response = await axios.get('http://localhost:4000/login');
-                setUsers(response.data);
-            } catch (e) {
-                setError(e);
-            }
-            setLoading(false);
-        };
-
-        fetchUsers();
-    }, []);
-
-    if (loading) return <div>유저 데이터를 읽어오는 중입니다...</div>;
-    if (error) return <div>에러가 발생했습니다</div>;
-    if (!user) return null;
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
+
+    const handleLogin = async () => {
+        await axios.post('http://localhost:4000/login', {
+            email: email,
+            password: password
+        })
+        .then((res) => {
+            props.handleResponseSuccess(res.data);
+        })
+        .catch((err) => alert(err));
+    }
 
     const onChange = (event) => {
         const { name, value } = event.target;
@@ -51,37 +40,37 @@ function Login (props) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        const user = users.find(
-            (user) => user.email === email && user.password === password
-        );
-        if (user === undefined) {
-            alert('등록된 유저가 아닙니다')
-        }
-
-        props.handleLogin(user);
+        handleLogin();
     }
 
     return <div>
+        <h1>CMOE 360-degree Feedback</h1>
         <form onSubmit={onSubmit}>
-            <label>이메일 : 
-                <input 
-                    name="email" 
-                    type="email" 
-                    placeholder="Email" 
-                    required 
-                    value={email} 
-                    onChange={onChange} />
-            </label>
-            <label>비밀번호 : 
-                <input 
-                    name="password" 
-                    type="password" 
-                    placeholder="password" 
-                    required 
-                    value={password} 
-                    onChange={onChange} />
-            </label>
-            <input type="submit" value="로그인"/>
+            <div>
+                <label>이메일 : 
+                    <input 
+                        name="email" 
+                        type="email" 
+                        placeholder="Email" 
+                        required 
+                        value={email} 
+                        onChange={onChange} />
+                </label>
+            </div>
+            <div>
+                <label>비밀번호 : 
+                    <input 
+                        name="password" 
+                        type="password" 
+                        placeholder="password" 
+                        required 
+                        value={password} 
+                        onChange={onChange} />
+                </label>
+            </div>
+            <div>
+                <input type="submit" value="로그인"/>
+            </div>
         </form>
     </div>
 }
