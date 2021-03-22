@@ -19,66 +19,66 @@ function App() {
     setIsLoggedIn(false);
   }
 
-  if (!isLoggedIn) {
-    return <Login handleResponseSuccess={handleResponseSuccess}/>
-  } else {
-    switch (user.role) {
-      case 'admin': 
-        return <Admin user={user}/>;
-      case 'manager':
-        return <Manager user={user}/>;
-      case 'user':
-        return <User user={user} />;
-    }
-  }
+  // if (!isLoggedIn) {
+  //   return <Login handleResponseSuccess={handleResponseSuccess}/>
+  // } else {
+  //   switch (user.role) {
+  //     case 'admin': 
+  //       return <Admin path='admin' user={user}/>;
+  //     case 'manager':
+  //       return <Manager user={user}/>;
+  //     case 'user':
+  //       return <User user={user} />;
+  //   }
+  // }
 
-  // return (
-  //   <div className="App">
-  //     <Router>
-  //       <Route
-  //         exact path='/login'
-  //         render={() => (
-  //           <Login handleResponseSuccess={handleResponseSuccess} />
-  //         )}
-  //       />
-  //       <Route
-  //         exact path='/admin'
-  //         render={() => (
-  //           <Admin user={user} handleLogout={handleLogout} />
-  //         )}
-  //       />
-  //       <Route
-  //         exact path='/manager'
-  //         render={() => (
-  //           <Manager user={user} handleLogout={handleLogout} />
-  //         )}
-  //       />
-  //       <Route
-  //         exact path='/user'
-  //         render={() => (
-  //           <User user={user} handleLogout={handleLogout} />
-  //         )}
-  //       />
-  //       <Route
-  //         path='/'
-  //         render={() => {
-  //           if (!isLoggedIn) {
-  //             return <Redirect to='/login' />
-  //           } else {
-  //             switch (user.role) {
-  //               case 'admin': 
-  //                 return <Redirect to='/admin' />
-  //               case 'manager':
-  //                 return <Redirect to='/manager' />
-  //               case 'user':
-  //                 return <Redirect to='/user' />
-  //             }
-  //           }
-  //         }}
-  //       />
-  //     </Router>
-  //   </div>
-  // );
+  return (
+    <div className="App">
+      <Router>
+      <Route
+          path='/'
+          render={() => {
+            if (!isLoggedIn) {
+              return <Redirect to='/login' />
+            } else {
+              switch (user.role) {
+                case 'admin': 
+                  return <Redirect to='/admin' />
+                case 'manager':
+                  return <Redirect to='/manager' />
+                case 'user':
+                  return <Redirect to='/user' />
+              }
+            }
+          }}
+        />
+        <Route
+          exact path='/login'
+          render={() => (
+            <Login handleResponseSuccess={handleResponseSuccess} />
+          )}
+        />
+        <Route
+          exact path='/admin'
+          render={() => (
+            <Admin user={user} handleLogout={handleLogout} />
+          )}
+        />
+        <Route
+          exact path='/manager'
+          render={() => (
+            <Manager user={user} handleLogout={handleLogout} />
+          )}
+        />
+        <Route
+          exact path='/user'
+          render={() => (
+            <User user={user} handleLogout={handleLogout} />
+          )}
+        />
+      </Router>
+    </div>
+  );
 }
 
 export default App;
