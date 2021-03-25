@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import XLSX from 'xlsx';
 
 function CreateProject() {
     const history = useHistory();
@@ -12,8 +13,11 @@ function CreateProject() {
     const [managerTel, setManagerTel] = useState(null);
     const [startDate, setStartDate] = useState(null);
     const [finishDate, setFinishDate] = useState(null);
+    const [usersInfo, setUsersInfo] = useState([]);
+    const [questions, setQuestions] = useState([]);
 
     const handleSubmit = async () => {
+        
         await axios.post('http://localhost:4000/createproject', {
             title: title,
             company: company,
@@ -21,10 +25,13 @@ function CreateProject() {
             managerEmail: managerEmail,
             managerTel: managerTel,
             startDate: startDate,
-            finishDate: finishDate
+            finishDate: finishDate,
+            usersInfo: usersInfo,
+            questions: questions
         })
         .then((res) => {
             console.log(res.data);
+            history.push('/admin');
         })
         .catch((err) => alert(err));
     }
@@ -32,15 +39,42 @@ function CreateProject() {
     const onChange = (event) => {
         const inputName = event.target.name;
         const inputValue = event.target.value;
+        console.log('inputName:', inputName, 'inputValue', inputValue);
         switch (inputName) {
             case 'title' : setTitle(inputValue);
+            break;
             case 'company' : setCompany(inputValue);
+            break;
             case 'managerName' : setManagerName(inputValue);
+            break;
             case 'managerEmail' : setManagerEmail(inputValue);
+            break;
             case 'managerTel' : setManagerTel(inputValue);
+            break;
             case 'startDate' : setStartDate(inputValue);
+            break;
             case 'finishDate' : setFinishDate(inputValue);
         }
+    }
+
+    const handleExcelFile = (event) => {
+        const inputName = event.target.name;
+        const fileList = event.target.files;
+        const file = fileList[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, {type: 'array'});
+            const sheetName = workbook.SheetNames[0];
+            const table = workbook.Sheets[sheetName];
+            const json = XLSX.utils.sheet_to_json(table);
+            switch (inputName) {
+                case 'usersInfo' : setUsersInfo(json);
+                break;
+                case 'questions' : setQuestions(json);
+            }
+        };
+        reader.readAsArrayBuffer(file);
     }
 
     const onSubmit = (event) => {
@@ -119,6 +153,26 @@ function CreateProject() {
                         required 
                         value={finishDate} 
                         onChange={onChange} />
+                </label>
+            </div>
+            <div>
+                <label>진단 참여자 명단 :  
+                    <input 
+                        name="usersInfo" 
+                        type="file" 
+                        required 
+                        accept=".xlsx"
+                        onChange={handleExcelFile} />
+                </label>
+            </div>
+            <div>
+                <label>진단 문항 : 
+                    <input 
+                        name="questions" 
+                        type="file" 
+                        accept=".xlsx"
+                        required 
+                        onChange={handleExcelFile} />
                 </label>
             </div>
             <div>

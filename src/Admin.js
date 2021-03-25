@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link, BrowserRouter as Router} from 'react-router-dom';
-import SurveyList from './SurveyList';
+import ProjectList from './ProjectList';
 import CreateProject from './CreateProject';
 import CreateSurvey from './CreateSurvey';
 
@@ -10,11 +10,11 @@ function Admin ({user}) {
         <>
         <Router>
             <h1>Admin</h1>
-            <Link to='/create-project'><button>프로젝트 등록</button></Link>
-            <Link to='/create-survey'><button>진단 등록</button></Link>
-            <Route path='/create-project' component={CreateProject} />
-            <Route path='/create-survey' component={CreateSurvey} />
-            <Route path='/admin' component={SurveyList} />
+            <Link to='/admin/create-project'><button>프로젝트 등록</button></Link>
+            <Link to='/admin/create-survey'><button>진단 등록</button></Link>
+            <Route exact path='/admin/create-project' component={CreateProject} />
+            <Route exact path='/admin/create-survey' component={CreateSurvey} />
+            <Route exact path='/admin' component={ProjectList} />
         </Router>
         </>
     )

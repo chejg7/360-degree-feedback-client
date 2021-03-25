@@ -1,9 +1,9 @@
 import React from 'react';
 
-function SurveyList() {
+function ProjectList() {
     return <>
         <h3>진단 목록</h3>
     </>
 }
 
-export default SurveyList;
+export default ProjectList;
