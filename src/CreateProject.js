@@ -6,27 +6,27 @@ import XLSX from 'xlsx';
 function CreateProject() {
     const history = useHistory();
 
-    const [title, setTitle] = useState('');
+    const [projectTitle, setProjectTitle] = useState('');
     const [company, setCompany] = useState('');
     const [managerName, setManagerName] = useState('');
     const [managerEmail, setManagerEmail] = useState('');
-    const [managerTel, setManagerTel] = useState(null);
+    const [managerMobile, setManagerMobile] = useState(null);
     const [startDate, setStartDate] = useState(null);
     const [finishDate, setFinishDate] = useState(null);
-    const [usersInfo, setUsersInfo] = useState([]);
-    const [questions, setQuestions] = useState([]);
+    const [userInfo, setUserInfo] = useState(null);
+    const [questions, setQuestions] = useState(null);
 
     const handleSubmit = async () => {
         
         await axios.post('http://localhost:4000/createproject', {
-            title: title,
+            projectTitle: projectTitle,
             company: company,
             managerName: managerName,
             managerEmail: managerEmail,
-            managerTel: managerTel,
+            managerMobile: managerMobile,
             startDate: startDate,
             finishDate: finishDate,
-            usersInfo: usersInfo,
+            userInfo: userInfo,
             questions: questions
         })
         .then((res) => {
@@ -41,7 +41,7 @@ function CreateProject() {
         const inputValue = event.target.value;
         console.log('inputName:', inputName, 'inputValue', inputValue);
         switch (inputName) {
-            case 'title' : setTitle(inputValue);
+            case 'projectTitle' : setProjectTitle(inputValue);
             break;
             case 'company' : setCompany(inputValue);
             break;
@@ -49,7 +49,7 @@ function CreateProject() {
             break;
             case 'managerEmail' : setManagerEmail(inputValue);
             break;
-            case 'managerTel' : setManagerTel(inputValue);
+            case 'managerMobile' : setManagerMobile(inputValue);
             break;
             case 'startDate' : setStartDate(inputValue);
             break;
@@ -68,8 +68,9 @@ function CreateProject() {
             const sheetName = workbook.SheetNames[0];
             const table = workbook.Sheets[sheetName];
             const json = XLSX.utils.sheet_to_json(table);
+            console.log(json);
             switch (inputName) {
-                case 'usersInfo' : setUsersInfo(json);
+                case 'userInfo' : setUserInfo(json);
                 break;
                 case 'questions' : setQuestions(json);
             }
@@ -88,10 +89,10 @@ function CreateProject() {
             <div>
                 <label>프로젝트명 : 
                     <input 
-                        name="title" 
+                        name="projectTitle" 
                         type="text" 
                         required 
-                        value={title} 
+                        value={projectTitle} 
                         onChange={onChange} />
                     </label>
                 </div>
@@ -128,10 +129,10 @@ function CreateProject() {
             <div>
                 <label>담당자 연락처 : 
                     <input 
-                        name="managerTel" 
+                        name="managerMobile" 
                         type="tel" 
                         required 
-                        value={managerTel} 
+                        value={managerMobile} 
                         onChange={onChange} />
                 </label>
             </div>
@@ -158,7 +159,7 @@ function CreateProject() {
             <div>
                 <label>진단 참여자 명단 :  
                     <input 
-                        name="usersInfo" 
+                        name="userInfo" 
                         type="file" 
                         required 
                         accept=".xlsx"
