@@ -4,6 +4,7 @@ import ProjectList from './ProjectList';
 import CreateProject from './CreateProject';
 import CreateSurvey from './CreateSurvey';
 import MatchingUsers from './MatchingUsers';
+import ProjectDetail from './ProjectDetail';
 
 function Admin ({user}) {
     console.log(user);
@@ -17,6 +18,7 @@ function Admin ({user}) {
             <Route exact path='/admin/create-project' component={CreateProject} />
             <Route exact path='/admin/create-survey' component={CreateSurvey} />
             <Route exact path='/admin/matching-users' component={MatchingUsers} />
+            <Route exact path='/admin/project' component={ProjectDetail} />
             <Route exact path='/admin' component={ProjectList} />
         </Router>
         </>

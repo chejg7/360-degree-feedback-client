@@ -17,7 +17,6 @@ function CreateProject() {
     const [questions, setQuestions] = useState(null);
 
     const handleSubmit = async () => {
-        
         await axios.post('http://localhost:4000/createproject', {
             projectTitle: projectTitle,
             company: company,
@@ -33,7 +32,10 @@ function CreateProject() {
             console.log(res.data);
             history.push('/admin');
         })
-        .catch((err) => alert(err));
+        .catch((err) => {
+            alert(err);
+            console.log(err);
+        });
     }
 
     const onChange = (event) => {
