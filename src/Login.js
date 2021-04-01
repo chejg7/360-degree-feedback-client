@@ -1,21 +1,9 @@
 import React, { useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
-
-//테스트용 유저 데이터베이스
-//실제로는 서버에서 유저 데이터베이스를 읽어옴(현재 진행 중인 진단 유저 데이터 & 마스터 데이터)
-//admin - 관리자 정보 { email, name, password }
-//진단 참여자 정보 { email, name, password, surveyName, company, authority, mobile, surveyInfo, answer }
-// const users = [
-//         { email: "admin@test.com", password: "123", name: "Kim", role: "admin" },
-//         { email: "manager@test.com", password: "123", name: "Lee", role: "manager" },
-//         { email: "user@test.com", password: "123", name: "Park", role: "user" },
-//     ]
 
 function Login (props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory();
 
     const handleLogin = async () => {
         await axios.post('http://localhost:4000/login', {
@@ -40,6 +28,17 @@ function Login (props) {
     const onSubmit = (event) => {
         event.preventDefault();
         handleLogin();
+    }
+
+    const handleTestLogin = async () => {
+        await axios.post('http://localhost:4000/login', {
+            email: 'chejg7@gmail.com',
+            password: 'cmoe2021'
+        })
+        .then((res) => {
+            props.handleResponseSuccess(res.data);
+        })
+        .catch((err) => alert(err));
     }
 
     return <div>
@@ -69,6 +68,13 @@ function Login (props) {
             </div>
             <div>
                 <input type="submit" value="로그인"/>
+            </div>
+            <div>또는</div>
+            <div>
+                <button onClick={handleTestLogin}>관리자 계정 테스트</button>
+            </div>
+            <div>
+                <button>유저 계정 테스트</button>
             </div>
         </form>
     </div>
