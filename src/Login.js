@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Admin from './Admin';
 
 //테스트용 유저 데이터베이스
 //실제로는 서버에서 유저 데이터베이스를 읽어옴(현재 진행 중인 진단 유저 데이터 & 마스터 데이터)
@@ -44,7 +43,7 @@ function Login (props) {
     }
 
     return <div>
-        <h1>CMOE 360-degree Feedback</h1>
+        <h1>360-degree Feedback</h1>
         <form onSubmit={onSubmit}>
             <div>
                 <label>이메일 : 

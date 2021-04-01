@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import XLSX from 'xlsx';
 
@@ -86,6 +86,9 @@ function CreateProject() {
     }
 
     return <>
+        <Link to='/admin'>
+            <button>리스트로 돌아가기</button>
+        </Link>
         <h3>프로젝트 등록</h3>
         <form onSubmit={onSubmit}>
             <div>

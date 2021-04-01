@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect, useHistory, BrowserRouter as Router } from 'react-router-dom';
 import Login from './Login';
-import Admin from './Admin';
-import Manager from './Manager';
-import User from './User';
+import Admin from './admin/Admin';
+import Manager from './user/Manager';
+import User from './user/User';
 
 function App() {
   const [user, setUser] = useState(null);
