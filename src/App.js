@@ -41,11 +41,11 @@ function App() {
             if (!isLoggedIn) {
               return <Redirect to='/login' />
             } else {
-              switch (user.role) {
+              switch (user.role[0]) {
                 case 'admin': 
                   return <Redirect to='/admin' />
                 case 'manager':
-                  return <Redirect to='/manager' />
+                  return <Redirect to='/user' />
                 case 'user':
                   return <Redirect to='/user' />
               }

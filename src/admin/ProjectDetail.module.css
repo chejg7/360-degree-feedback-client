@@ -1,0 +1,24 @@
+.table {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 3px solid #036;
+    border-bottom: 1px solid #036;
+    font-size: 14px;
+}
+
+.table th {
+    width: 100px;
+    padding: 5px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+}
+
+.table td {
+    width: 350px;
+    padding: 5px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}

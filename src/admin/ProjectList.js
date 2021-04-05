@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Link, useHistory, BrowserRouter as Router} from 'react-router-dom';
+import styles from './ProjectList.module.css';
 import axios from 'axios';
 
 function ProjectItem(props) {
@@ -23,8 +24,8 @@ function ProjectItem(props) {
                 <td>{project.managerName}</td>
                 <td>{project.managerEmail}</td>
                 <td>{project.managerMobile}</td>
-                <td>{project.startDate}</td>
-                <td>{project.finishDate}</td>
+                <td>{project.startDate.substring(0, 10)}</td>
+                <td>{project.finishDate.substring(0, 10)}</td>
                 <td><button 
                     onClick={handleItemClick}
                     value={project}
@@ -35,7 +36,7 @@ function ProjectItem(props) {
 }
 
 function ProjectList() {
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState(null);
 
     useEffect(async () => {
         const result = await axios.get('http://localhost:4000/getprojects');
@@ -51,7 +52,7 @@ function ProjectList() {
             <button>진단자 매칭</button>
         </Link>
         <h3>진단 프로젝트 리스트</h3>
-        <table border='1'>
+        <table className={styles.table}>
             <thead>
                 <tr>
                     <th>번호</th>
@@ -62,12 +63,13 @@ function ProjectList() {
                     <th>담당자 연락처</th>
                     <th>시작일</th>
                     <th>종료일</th>
+                    <th>기능</th>
                 </tr>
             </thead>
             <tbody>
-                {projects.map((project, idx) => (
+                {projects ? projects.map((project, idx) => (
                     <ProjectItem project={project} idx={idx}/>
-                ))}
+                )) : <div>진단 데이터를 읽어오는 중입니다...</div>}
             </tbody>
         </table>
     </>

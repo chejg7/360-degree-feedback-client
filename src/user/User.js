@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function User ({user}) {
-    console.log(user);
+    console.log('넘어온 유저 데이터', user);
 
     const [project, setProject] = useState();
 
     useEffect(async () => {
-        console.log(user)
         const result = await axios.post('http://localhost:4000/users/project', {
             email: user.email,
             projectTitle: user.projectTitle

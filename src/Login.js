@@ -31,7 +31,19 @@ function Login (props) {
         handleLogin();
     }
 
-    const handleTestLogin = async () => {
+    const handleAdminTestLogin = async () => {
+        await axios.post('http://localhost:4000/login', {
+            email: 'chejg7@gmail.com',
+            password: 'cmoe2021'
+        })
+        .then((res) => {
+            console.log('받아온 유저 데이터', res.data);
+            props.handleResponseSuccess(res.data);
+        })
+        .catch((err) => alert(err));
+    }
+
+    const handleUserTestLogin = async () => {
         await axios.post('http://localhost:4000/login', {
             email: 'chejg7@gmail.com',
             password: 'cmoe2021'
@@ -68,13 +80,11 @@ function Login (props) {
                             onChange={onChange}
                         />
                     <button>로그인</button>
-                </div>
-                <div>또는</div>
-                <div>
-                    <button onClick={handleTestLogin}>관리자 계정 테스트</button>
-                </div>
-                <div>
-                    <button>유저 계정 테스트</button>
+                    </div>
+                <div className={styles.caption}>
+                    <div>또는</div>
+                    <button onClick={handleAdminTestLogin}>관리자 계정 테스트</button>
+                    <button onClick={handleUserTestLogin}>유저 계정 테스트</button>
                 </div>
             </form>
         </div>
