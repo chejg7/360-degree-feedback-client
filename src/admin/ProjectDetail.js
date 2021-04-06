@@ -1,18 +1,32 @@
 import React from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import axios from 'axios';
 import styles from './ProjectDetail.module.css';
 
 function ProjectDetail () {
     const location = useLocation();
     const project = location.state.project;
-    console.log(project);
+    console.log('넘어온 프로젝트 데이터', project);
+
+    const handleFinishProject = () => {
+
+    }
+
+    const handleDownloadResult = () => {
+
+    }
+
+    const handleRemoveProject = () => {
+
+    }
+
     return <div className={styles.container}>
         <Link to='/admin'>
             <button>리스트로 돌아가기</button>
         </Link>
-        <button>참여자 정보 업데이트</button>
-        <button>진단 문항 업데이트</button>
-        <button>프로젝트 삭제하기</button>
+        <button onClick={handleFinishProject}>프로젝트 완료</button>
+        <button onClick={handleDownloadResult}>결과 다운로드</button>
+        <button onClick={handleRemoveProject}>프로젝트 삭제</button>
         <h3>{project.projectTitle}</h3>
         <table className={styles.table}>
             <tr>

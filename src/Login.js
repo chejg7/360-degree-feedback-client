@@ -45,7 +45,7 @@ function Login (props) {
 
     const handleUserTestLogin = async () => {
         await axios.post('http://localhost:4000/login', {
-            email: 'chejg7@gmail.com',
+            email: 'AITASKIM@shinhan.com',
             password: 'cmoe2021'
         })
         .then((res) => {
