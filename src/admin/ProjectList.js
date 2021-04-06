@@ -39,7 +39,7 @@ function ProjectList() {
     const [projects, setProjects] = useState(null);
 
     useEffect(async () => {
-        const result = await axios.get('http://localhost:4000/getprojects');
+        const result = await axios.get('http://localhost:4000/project');
         setProjects(result.data);
         console.log('프로젝트 데이터', projects);
     },[])

@@ -18,7 +18,7 @@ function CreateProject() {
     const [questions, setQuestions] = useState(null);
 
     const handleSubmit = async () => {
-        await axios.post('http://localhost:4000/createproject', {
+        await axios.post('http://localhost:4000/project/create', {
             projectTitle: projectTitle,
             company: company,
             managerName: managerName,

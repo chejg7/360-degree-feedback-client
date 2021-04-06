@@ -8,7 +8,16 @@ function ProjectDetail () {
     const project = location.state.project;
     console.log('넘어온 프로젝트 데이터', project);
 
-    const handleFinishProject = () => {
+    const handleFinishProject = async () => {
+        await axios.post('http://localhost:4000/project/finish', {
+            projectTitle: project.projectTitle
+        })
+        .then((res) => {
+            console.log(res.data);
+        })
+    }
+
+    const handleStartProject = () => {
 
     }
 
@@ -25,6 +34,7 @@ function ProjectDetail () {
             <button>리스트로 돌아가기</button>
         </Link>
         <button onClick={handleFinishProject}>프로젝트 완료</button>
+        <button onClick={handleStartProject}>프로젝트 재시작</button>
         <button onClick={handleDownloadResult}>결과 다운로드</button>
         <button onClick={handleRemoveProject}>프로젝트 삭제</button>
         <h3>{project.projectTitle}</h3>
