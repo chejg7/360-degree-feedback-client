@@ -4,14 +4,18 @@ import styles from './ProjectList.module.css';
 import axios from 'axios';
 
 function ProjectItem(props) {
-    const { project, idx } = props;
+    const { project, idx, projects } = props;
     const history = useHistory();
 
-    const handleItemClick = (event) => {
+    const handleItemClick = () => {
         console.log('클릭한 개별 프로젝트 데이터', project);
+        console.log('전체 프로젝트 데이터', projects)
         history.push({
             pathname: '/admin/project',
-            state: { project: project }
+            state: { 
+                project: project,
+                projects: projects
+            }
         });
     }
 
@@ -37,10 +41,12 @@ function ProjectItem(props) {
 
 function ProjectList() {
     const [projects, setProjects] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(async () => {
         const result = await axios.get('http://localhost:4000/project');
         setProjects(result.data);
+        setIsLoaded(true);
         console.log('프로젝트 데이터', projects);
     },[])
 
@@ -52,26 +58,30 @@ function ProjectList() {
             <button>진단자 매칭</button>
         </Link>
         <h3>진단 프로젝트 리스트</h3>
-        <table className={styles.table}>
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>프로젝트명</th>
-                    <th>회사명</th>
-                    <th>담당자 이름</th>
-                    <th>담당자 이메일</th>
-                    <th>담당자 연락처</th>
-                    <th>시작일</th>
-                    <th>종료일</th>
-                    <th>기능</th>
-                </tr>
-            </thead>
-            <tbody>
-                {projects ? projects.map((project, idx) => (
-                    <ProjectItem project={project} idx={idx}/>
-                )) : <div>진단 데이터를 읽어오는 중입니다...</div>}
-            </tbody>
-        </table>
+        {!isLoaded ? <div>진단 데이터를 읽어오는 중입니다...</div> : (
+            projects.length === 0 ? <div>현재 등록된 진단 프로젝트가 없습니다</div> :
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>프로젝트명</th>
+                        <th>회사명</th>
+                        <th>담당자 이름</th>
+                        <th>담당자 이메일</th>
+                        <th>담당자 연락처</th>
+                        <th>시작일</th>
+                        <th>종료일</th>
+                        <th>기능</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {projects.map((project, idx, projects) => (
+                        <ProjectItem project={project} idx={idx} projects={projects}/>
+                    ))}
+                </tbody>
+            </table>
+            )
+        }
     </>
 }
 

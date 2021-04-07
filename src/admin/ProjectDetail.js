@@ -4,9 +4,12 @@ import axios from 'axios';
 import styles from './ProjectDetail.module.css';
 
 function ProjectDetail () {
+    const history = useHistory();
     const location = useLocation();
     const project = location.state.project;
-    console.log('넘어온 프로젝트 데이터', project);
+    const projects = location.state.projects;
+    console.log('넘어온 개별 프로젝트 데이터', project);
+    console.log('넘어온 전체 프로젝트 데이터', projects);
 
     const handleFinishProject = async () => {
         await axios.post('http://localhost:4000/project/finish', {
@@ -14,7 +17,7 @@ function ProjectDetail () {
         })
         .then((res) => {
             console.log(res.data);
-        })
+        });
     }
 
     const handleStartProject = () => {
@@ -25,8 +28,14 @@ function ProjectDetail () {
 
     }
 
-    const handleRemoveProject = () => {
-
+    const handleRemoveProject = async () => {
+        await axios.post('http://localhost:4000/project/remove', {
+            projectTitle: project.projectTitle
+        })
+        .then((res) => {
+            console.log(res.data);
+        });
+        history.push('/admin');
     }
 
     return <div className={styles.container}>
