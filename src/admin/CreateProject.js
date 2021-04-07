@@ -91,99 +91,99 @@ function CreateProject() {
             <button>리스트로 돌아가기</button>
         </Link>
         <h3>프로젝트 등록</h3>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={styles.createForm}>
             <div>
-                <label>프로젝트명 : 
+                <label>프로젝트명</label>
                     <input 
                         name="projectTitle" 
                         type="text" 
                         required 
                         value={projectTitle} 
                         onChange={onChange} />
-                    </label>
+                    
                 </div>
             <div>
-                <label>기업명 : 
+                <label>기업명</label> 
                     <input 
                         name="company" 
                         type="text" 
                         required 
                         value={company} 
                         onChange={onChange} />
-                </label>
+                
             </div>
             <div>
-                <label>담당자 이름 : 
+                <label>담당자 이름</label> 
                     <input 
                         name="managerName" 
                         type="text" 
                         required 
                         value={managerName} 
                         onChange={onChange} />
-                </label>
+                
             </div>
             <div>
-                <label>담당자 이메일 : 
+                <label>담당자 이메일</label> 
                     <input 
                         name="managerEmail" 
                         type="email" 
                         required 
                         value={managerEmail} 
                         onChange={onChange} />
-                </label>
+                
             </div>
             <div>
-                <label>담당자 연락처 : 
+                <label>담당자 연락처</label>
                     <input 
                         name="managerMobile" 
                         type="tel" 
                         required 
                         value={managerMobile} 
                         onChange={onChange} />
-                </label>
+                
             </div>
             <div>
-                <label>시작일 : 
+                <label>시작일</label> 
                     <input 
                         name="startDate" 
                         type="date" 
                         required 
                         value={startDate} 
                         onChange={onChange} />
-                </label>
+                
             </div>
             <div>
-                <label>완료일 : 
+                <label>완료일</label>
                     <input 
                         name="finishDate" 
                         type="date" 
                         required 
                         value={finishDate} 
                         onChange={onChange} />
-                </label>
+                
             </div>
             <div>
-                <label>진단 참여자 명단 :  
+                <label>진단 참여자 명단</label>  
                     <input 
                         name="userInfo" 
                         type="file" 
                         required 
                         accept=".xlsx"
                         onChange={handleExcelFile} />
-                </label>
+                
             </div>
             <div>
-                <label>진단 문항 : 
+                <label>진단 문항</label>
                     <input 
                         name="questions" 
                         type="file" 
                         accept=".xlsx"
                         required 
                         onChange={handleExcelFile} />
-                </label>
+                
             </div>
             <div>
-                <input type="submit" value="등록하기"/>
+                <button>등록하기</button>
             </div>
         </form>
         </>
