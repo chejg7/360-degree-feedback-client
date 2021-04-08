@@ -71,7 +71,7 @@ function CreateProject() {
             const sheetName = workbook.SheetNames[0];
             const table = workbook.Sheets[sheetName];
             const json = XLSX.utils.sheet_to_json(table);
-            console.log(json);
+            console.log('엑셀 데이터', json);
             switch (inputName) {
                 case 'userInfo' : setUserInfo(json);
                 break;
@@ -123,7 +123,7 @@ function CreateProject() {
                 
             </div>
             <div>
-                <label>담당자 이메일</label> 
+                <label className={styles.label}>담당자 이메일</label> 
                     <input 
                         name="managerEmail" 
                         type="email" 
@@ -133,7 +133,7 @@ function CreateProject() {
                 
             </div>
             <div>
-                <label>담당자 연락처</label>
+                <label className={styles.label}>담당자 연락처</label>
                     <input 
                         name="managerMobile" 
                         type="tel" 
@@ -143,7 +143,7 @@ function CreateProject() {
                 
             </div>
             <div>
-                <label>시작일</label> 
+                <label className={styles.label}>시작일</label> 
                     <input 
                         name="startDate" 
                         type="date" 
@@ -153,7 +153,7 @@ function CreateProject() {
                 
             </div>
             <div>
-                <label>완료일</label>
+                <label className={styles.label}>완료일</label>
                     <input 
                         name="finishDate" 
                         type="date" 
@@ -163,7 +163,7 @@ function CreateProject() {
                 
             </div>
             <div>
-                <label>진단 참여자 명단</label>  
+                <label className={styles.label}>진단 참여자 명단</label>  
                     <input 
                         name="userInfo" 
                         type="file" 

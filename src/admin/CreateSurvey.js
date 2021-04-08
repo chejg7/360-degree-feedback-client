@@ -40,7 +40,7 @@ function CreateSurvey() {
             const sheetName = workbook.SheetNames[0];
             const table = workbook.Sheets[sheetName];
             const json = XLSX.utils.sheet_to_json(table);
-            console.log(json);
+            console.log('엑셀 데이터 json', json);
             setQuestions(json);
         };
         reader.readAsArrayBuffer(file);

@@ -76,7 +76,7 @@ function ProjectList() {
                 </thead>
                 <tbody>
                     {projects.map((project, idx, projects) => (
-                        <ProjectItem project={project} idx={idx} projects={projects}/>
+                        <ProjectItem key={idx} project={project} idx={idx} projects={projects}/>
                     ))}
                 </tbody>
             </table>

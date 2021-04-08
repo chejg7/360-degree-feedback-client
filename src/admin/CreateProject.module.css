@@ -1,7 +1,33 @@
 .createForm {
+    width: 350px;   
     font-size: 14px;
+    border-top: 3px solid #036;
+    border-bottom: 1px solid #036;
+    padding: 5px
 }
 
-.createForm div {
+.createForm label {
+    display: inline-block;
+    width: 100px;
     padding: 5px;
+}
+
+.createForm input {
+    width: 200px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.createForm button {
+    width: 212px;
+    border: none;
+    color: white;
+    background-color: grey;
+    padding: 5px;
+    margin-top: 5px;
+    margin-left: 110px;
+}
+
+.createForm button:hover {
+    background-color: rgb(80, 76, 76);
 }
