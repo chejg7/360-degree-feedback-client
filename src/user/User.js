@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Link, useHistory, BrowserRouter as Router} from 'react-router-dom';
 import axios from 'axios';
-
-function Survey ({project}) {
-    console.log('서베이 컴포넌트로 넘어온 데이터', project);
-    return <div>
-        <h4>{project.projectTitle}</h4>
-        <table>
-            <thead>
-                
-            </thead>
-        </table>
-    </div>
-}
+import SurveyList from './SurveyList';
+import Survey from './Survey';
 
 function User ({user}) {
     console.log('넘어온 유저 데이터', user);
@@ -28,10 +19,14 @@ function User ({user}) {
     },[]);
 
     return <>
-        <h1>User</h1>
-        <h4>{user.name} 님</h4>
-        <div>귀하께서 참여하셔야 하는 진단은 다음과 같습니다</div>
-        {projects.map((project, idx) => <Survey key={idx} project={project} />)}
+        <Router>
+            <h1>User</h1>
+            <Route exact path='/user/survey' component={Survey} />
+            <Route exact path='/user' component={SurveyList} 
+                projects={projects}
+                user={user}
+            />
+        </Router>
     </>
 }
 
