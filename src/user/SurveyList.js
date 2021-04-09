@@ -16,33 +16,31 @@ function SurveyItem ({survey}) {
     </tr>
 }
 
-function SurveyList (props) {
-    console.log('서베이리스트 컴포넌트로 넘어온 데이터', props);
-    const user = props.user;
-    const projects = props.projects;
+function SurveyList ({projects}) {
+    console.log('서베이리스트 컴포넌트로 넘어온 데이터', projects);
 
     return <div>
-        <h4>{user.name} 님</h4>
-        {projects.map((project, idx) => <Survey key={idx} project={project} />)}
-        <h4>{project.projectTitle}</h4>
-        <table className={styles.table}>
-            <thead>
-                <tr>
-                    <th>대상자</th>
-                    <th>직위</th>
-                    <th>본부</th>
-                    <th>부서</th>
-                    <th>팀</th>
-                    <th>완료시간</th>
-                    <th>기능</th>
-                </tr>
-            </thead>
-            <tbody>
-                {project.evaluatedInfo.map((survey, idx) => (
-                    <SurveyItem key={idx} survey={survey} />
-                ))}
-            </tbody>
-        </table>
+        {projects.map((project) => <div>
+            <h4>{project.projectTitle}</h4>
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th>대상자</th>
+                        <th>직위</th>
+                        <th>본부</th>
+                        <th>부서</th>
+                        <th>팀</th>
+                        <th>완료시간</th>
+                        <th>기능</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {project.evaluatedInfo.map((survey, idx) => (
+                        <SurveyItem key={idx} survey={survey} />
+                    ))}
+                </tbody>
+            </table>
+        </div>)}
     </div>
 }
 

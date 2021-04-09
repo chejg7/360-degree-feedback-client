@@ -21,10 +21,10 @@ function User ({user}) {
     return <>
         <Router>
             <h1>User</h1>
+            <h4>{user.name} 님</h4>
             <Route exact path='/user/survey' component={Survey} />
-            <Route exact path='/user' component={SurveyList} 
-                projects={projects}
-                user={user}
+            <Route exact path='/user' 
+                render={() => <SurveyList projects={projects} />}
             />
         </Router>
     </>
