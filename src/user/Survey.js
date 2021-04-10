@@ -3,10 +3,16 @@ import { useHistory } from 'react-router-dom';
 import styles from './Survey.module.css';
 
 function Question (props) {
-    const { survey, questionsObj } = props;
-
+    const { survey, questions } = props;
+    const splitedQuestions = questions.filter(question => question['진단명'] === survey);
+    console.log(splitedQuestions);
     return <div>
         <h5>{survey}</h5>
+        {splitedQuestions.map((question) => 
+            <div>
+                <div>{question['문항']}</div>
+            </div>
+        )}
     </div>
 }
 
@@ -18,10 +24,7 @@ function Survey (props) {
 
     const surveyTitle = evaluated.surveyTitle.split('+')
     console.log('진단', surveyTitle);
-    const questionsObj = {};
-    for (let question of questions) {
-        
-    }
+    
 
     const handleClick = () => {
         history.goBack();
@@ -52,7 +55,7 @@ function Survey (props) {
             </tbody>
         </table>
         {surveyTitle.map((survey, idx) => 
-            <Question key={idx} survey={survey} questionsObj={questionsObj} />)}
+            <Question key={idx} survey={survey} questions={questions} />)}
     </div>
 }
 
