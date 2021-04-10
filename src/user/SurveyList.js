@@ -1,17 +1,36 @@
 import React from 'react';
+import { Route, Link, useHistory, BrowserRouter as Router} from 'react-router-dom';
 import styles from './SurveyList.module.css';
 
-function SurveyItem ({survey}) {
+function SurveyItem (props) {
+    const history = useHistory();
+    const evaluated = props.evaluated;
+    const questions = props.questions;
+
+    const handleClick = () => {
+        history.push({
+            pathname: '/user/survey',
+            state: { 
+                evaluated: evaluated,
+                questions: questions
+            }
+        })
+    }
+
     return <tr>
-        <td>{survey.evaluatedName}</td>
-        <td>{survey.evaluatedPosition}</td>
-        <td>{survey.evaluatedDivision}</td>
-        <td>{survey.evaluatedDepartment}</td>
-        <td>{survey.evaluatedTeam}</td>
-        <td>{survey.response ? survey.updatedAt : '미완료'}</td>
-        <td>{survey.response ? 
+        <td>{evaluated.evaluatedName}</td>
+        <td>{evaluated.evaluatedPosition}</td>
+        <td>{evaluated.evaluatedDivision}</td>
+        <td>{evaluated.evaluatedDepartment}</td>
+        <td>{evaluated.evaluatedTeam}</td>
+        <td>{evaluated.response ? evaluated.updatedAt : '미완료'}</td>
+        {/* <td>{evaluated.response ? 
             <button>다시하기</button>
             : <button>진단하기</button>}
+        </td> */}
+        <td><button onClick={handleClick}>
+                {evaluated.response ? '다시하기' : '진단하기'}
+            </button>
         </td>
     </tr>
 }
@@ -35,8 +54,12 @@ function SurveyList ({projects}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {project.evaluatedInfo.map((survey, idx) => (
-                        <SurveyItem key={idx} survey={survey} />
+                    {project.evaluatedInfo.map((evaluated, idx) => (
+                        <SurveyItem 
+                            key={idx} 
+                            evaluated={evaluated} 
+                            questions={project.questions}
+                        />
                     ))}
                 </tbody>
             </table>
