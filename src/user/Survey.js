@@ -10,8 +10,60 @@ function Question (props) {
         <h5>{survey}</h5>
         {splitedQuestions.map((question) => 
             <div>
-                <div>{question['문항']}</div>
+                <div>
+                    <span>{question['번호']}. </span>
+                    <span>{question['문항']}</span>
+                </div>
+                <div>
+                    <input 
+                        type='radio'
+                        name='radio'
+                        value='1'
+                    />
+                    <div>전혀 그렇지 않다</div>
+                </div>
+                <div>
+                    <input 
+                        type='radio'
+                        name='radio'
+                        value='2'
+                    />
+                    <div>전혀 그렇지 않다</div>
+                </div>
+                <div>
+                    <input 
+                        type='radio'
+                        name='radio'
+                        value='3'
+                    />
+                    <div>전혀 그렇지 않다</div>
+                </div>
+                <div>
+                    <input 
+                        type='radio'
+                        name='radio'
+                        value='4'
+                    />
+                    <div>전혀 그렇지 않다</div>
+                </div>
+                <div>
+                    <input 
+                        type='radio'
+                        name='radio'
+                        value='5'
+                    />
+                    <div>전혀 그렇지 않다</div>
+                </div>
+                <div>
+                    <input 
+                        type='radio'
+                        name='radio'
+                        value='6'
+                    />
+                    <div>전혀 그렇지 않다</div>
+                </div>
             </div>
+            
         )}
     </div>
 }
