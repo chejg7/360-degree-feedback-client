@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import XLSX from 'xlsx';
 import styles from './ProjectDetail.module.css';
 
 function Responses ({responses}) {
@@ -111,7 +112,23 @@ function ProjectDetail () {
     }
 
     const handleDownloadResult = async () => {
-        alert('아직 기능 구현 전입니다');
+        const newResponses = responses.map(res => {
+            const newObj = {...res};
+            if (res.response) {
+                for (let el of res.response) {
+                    const key = el.survey + el.num;
+                    const val = el.response;
+                    newObj[key] = val;
+                }
+            }
+
+            return newObj;
+        })
+        console.log('엑셀로 저장하기 위한 json', newResponses);
+        const workbook = XLSX.utils.book_new();
+        const newWorksheet = XLSX.utils.json_to_sheet(newResponses);
+        XLSX.utils.book_append_sheet(workbook, newWorksheet, 'DATA');
+        XLSX.writeFile(workbook, '진단 결과 데이터.xlsx');
     }
 
     const handleRemoveProject = async () => {
