@@ -3,12 +3,12 @@
 .container {
     box-sizing: border-box;
     font-family: 'Noto Sans KR', sans-serif;
-    height: 100vh;
+    height: 80vh;
 }
 
 .container h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .container h3 {
@@ -29,10 +29,19 @@
     margin-right: 20px;
 }
 
+@media screen and (max-width: 480px) {
+    .wrapper img {
+        display: none;
+    }
+}
+
 .loginForm {
     width: 250px;
     padding: 10px 10px 10px 10px;
     background-color: rgb(231, 231, 241);
+    box-shadow: rgb(0 0 0 / 10%) 0px 2px 8px 0px;
+    border: rgb(224, 224, 224);
+    border-radius: 8px;
 }
 
 .inputArea input {
@@ -41,9 +50,7 @@
     background-color: rgba(203, 212, 233, 0.966);
     border-bottom: 1px solid #999;
     padding: 5px;
-    font-size: 14px;
-    margin-bottom: 10px;
-    
+    margin-bottom: 8px;
 }
 
 .inputArea label {
@@ -56,7 +63,7 @@
     color: white;
     background-color: rgba(7, 7, 126, 0.39);
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .inputArea button:hover {
@@ -65,7 +72,7 @@
 
 .caption {
     text-align: center;
-    font-size: 14px;
+    font-size: 12px;
     border-top: 1px solid #999;
     padding-top: 5px;
     margin-bottom: 5px;
@@ -81,7 +88,7 @@
     color: white;
     background-color: grey;
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .caption button:hover {
