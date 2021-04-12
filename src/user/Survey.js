@@ -11,9 +11,12 @@ function Question (props) {
     const handleRadio = (event) => {
         console.log(event.target.name);
         console.log(event.target.value);
+        const nameArr = event.target.name.split(',');
         props.handleClickRadio({
             survey: survey,
-            num: event.target.name,
+            num: nameArr[0],
+            category: nameArr[1],
+            question: nameArr[2],
             response: event.target.value
         })
     }
@@ -30,7 +33,7 @@ function Question (props) {
                     <div className={styles.radio}>
                         <input 
                             type='radio'
-                            name={question['번호']}
+                            name={[question['번호'], question['카테고리'], question['문항']]}
                             value='1'
                             onClick={handleRadio}
                         />
@@ -39,7 +42,7 @@ function Question (props) {
                     <div className={styles.radio}>
                         <input 
                             type='radio'
-                            name={question['번호']}
+                            name={[question['번호'], question['카테고리'], question['문항']]}
                             value='2'
                             onClick={handleRadio}
                         />
@@ -48,7 +51,7 @@ function Question (props) {
                     <div className={styles.radio}>
                         <input 
                             type='radio'
-                            name={question['번호']}
+                            name={[question['번호'], question['카테고리'], question['문항']]}
                             value='3'
                             onClick={handleRadio}
                         />
@@ -57,7 +60,7 @@ function Question (props) {
                     <div className={styles.radio}>
                         <input 
                             type='radio'
-                            name={question['번호']}
+                            name={[question['번호'], question['카테고리'], question['문항']]}
                             value='4'
                             onClick={handleRadio}
                         />
@@ -66,7 +69,7 @@ function Question (props) {
                     <div className={styles.radio}>
                         <input 
                             type='radio'
-                            name={question['번호']}
+                            name={[question['번호'], question['카테고리'], question['문항']]}
                             value='5'
                             onClick={handleRadio}
                         />
@@ -75,7 +78,7 @@ function Question (props) {
                     <div className={styles.radio}>
                         <input 
                             type='radio'
-                            name={question['번호']}
+                            name={[question['번호'], question['카테고리'], question['문항']]}
                             value='6'
                             onClick={handleRadio}
                         />
@@ -102,9 +105,26 @@ function Survey (props) {
         history.goBack();
     }
 
-    const handleSubmit = () => {
-        if (questions.length === response.length) {
-
+    const handleSubmit = async () => {
+        const fullQuestions = [];
+        for (let survey of surveyTitle) {
+            for (let question of questions) {
+                if (survey === question['진단명']) fullQuestions.push(question);
+            }
+        }
+        if (fullQuestions.length === response.length) {
+            await axios.post('http://localhost:4000/users/response', {
+                evaluated: evaluated, 
+                data: response
+            })
+            .then((res) => {
+                console.log(res.data);
+                history.goBack();
+            })
+            .catch((err) => {
+                alert(err);
+                console.log(err);
+            });
         } else {
             alert('모든 문항에 답변해 주시길 바랍니다')
         }

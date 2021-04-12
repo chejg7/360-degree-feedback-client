@@ -7,16 +7,16 @@ import Survey from './Survey';
 function User ({user}) {
     console.log('넘어온 유저 데이터', user);
 
-    const [projects, setProjects] = useState([]);
+    // const [projects, setProjects] = useState([]);
 
-    useEffect(async () => {
-        const result = await axios.post('http://localhost:4000/users/project', {
-            email: user.email,
-            projectTitle: user.projectTitle
-        });
-        console.log(result.data);
-        setProjects(result.data);
-    },[]);
+    // useEffect(async () => {
+    //     const result = await axios.post('http://localhost:4000/users/project', {
+    //         email: user.email,
+    //         projectTitle: user.projectTitle
+    //     });
+    //     console.log(result.data);
+    //     setProjects(result.data);
+    // },[]);
 
     return <>
         <Router>
@@ -24,7 +24,7 @@ function User ({user}) {
             <h4>{user.name} 님</h4>
             <Route exact path='/user/survey' component={Survey} />
             <Route exact path='/user' 
-                render={() => <SurveyList projects={projects} />}
+                render={() => <SurveyList user={user} />}
             />
         </Router>
     </>

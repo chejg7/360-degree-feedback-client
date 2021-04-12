@@ -22,3 +22,21 @@
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
+
+.list {
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 10px;
+}
+
+.list th {
+    font-weight: bold;
+    color: #369;
+    border-bottom: 3px solid #036;
+    padding: 10px;
+}
+
+.list td {
+    padding: 5px;
+    border-bottom: 1px solid #999;
+}

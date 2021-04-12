@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Link, useHistory, BrowserRouter as Router} from 'react-router-dom';
+import axios from 'axios';
 import styles from './SurveyList.module.css';
 
 function SurveyItem (props) {
@@ -23,20 +24,30 @@ function SurveyItem (props) {
         <td>{evaluated.evaluatedDivision}</td>
         <td>{evaluated.evaluatedDepartment}</td>
         <td>{evaluated.evaluatedTeam}</td>
-        <td>{evaluated.response ? evaluated.updatedAt : '미완료'}</td>
-        {/* <td>{evaluated.response ? 
-            <button>다시하기</button>
+        <td>{evaluated.response ? evaluated.updatedAt.substring(0, 19) : '미완료'}</td>
+        <td>{evaluated.response ? 
+            <button className={styles.restartButton}>다시하기</button>
             : <button>진단하기</button>}
-        </td> */}
-        <td><button onClick={handleClick}>
+        </td>
+        {/* <td><button onClick={handleClick}>
                 {evaluated.response ? '다시하기' : '진단하기'}
             </button>
-        </td>
+        </td> */}
     </tr>
 }
 
-function SurveyList ({projects}) {
-    console.log('서베이리스트 컴포넌트로 넘어온 데이터', projects);
+function SurveyList ({user}) {
+    console.log('서베이리스트 컴포넌트로 넘어온 유저 데이터', user);
+    const [projects, setProjects] = useState([]);
+
+    useEffect(async () => {
+        const result = await axios.post('http://localhost:4000/users/project', {
+            email: user.email,
+            projectTitle: user.projectTitle
+        });
+        console.log(result.data);
+        setProjects(result.data);
+    },[]);
 
     return <div>
         {projects.map((project) => <div>

@@ -54,9 +54,10 @@ function ProjectList() {
         <Link to='/admin/create-project'>
             <button>프로젝트 등록</button>
         </Link>
-        <Link to='/admin/matching-users'>
+        //진단자 매칭 기능 구현 전
+        {/* <Link to='/admin/matching-users'>
             <button>진단자 매칭</button>
-        </Link>
+        </Link> */}
         <h3>진단 프로젝트 리스트</h3>
         {!isLoaded ? <div>진단 데이터를 읽어오는 중입니다...</div> : (
             projects.length === 0 ? <div>현재 등록된 진단 프로젝트가 없습니다</div> :

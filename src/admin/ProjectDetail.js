@@ -4,20 +4,67 @@ import axios from 'axios';
 import styles from './ProjectDetail.module.css';
 
 function Responses (props) {
-    const [responses, setResponses] = useState(null);
+    const [responses, setResponses] = useState([]);
+    console.log('프로젝트 타이틀', props.projectTitle)
 
-    // useEffect(async () => {
-    //     const result = await axios.post('http://localhost:4000/responses', {
-    //         projectTitle: props.projectTitle
-    //     })
-    //     .then(res => {
-    //         console.log('받아온 응답 데이터', res.data)
-    //         setResponses(res.data);
-    //     });
-    // }, [])
+    useEffect(async () => {
+        await axios.post('http://localhost:4000/responses', {
+            projectTitle: props.projectTitle
+        })
+        .then(res => {
+            console.log('받아온 응답 데이터', res.data)
+            setResponses(res.data);
+        });
+    }, [])
+
+    const list = responses.reduce((acc, cur) => {
+        const idx = acc.findIndex(el => el.evaluatorEmail === cur.evaluatorEmail);
+        
+        if (idx > -1) {
+            acc[idx].isSigned++;
+            if (cur.response) acc[idx].isCompleted++;
+        } else {
+            const copied = {...cur};
+            copied.isSigned = 1;
+            copied.isCompleted = cur.response ? 1 : 0;
+            acc.push(copied);
+        }
+
+        return acc;
+    }, [])
 
     return <div>
         <h5>진단 참여자 리스트</h5>
+        <table className={styles.list}>
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>직위</th>
+                    <th>본부</th>
+                    <th>부서</th>
+                    <th>팀</th>
+                    <th>이메일</th>
+                    <th>휴대폰</th>
+                    <th>등록된 진단</th>
+                    <th>완료한 진단</th>
+                    <th>완료율(%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {list.map(el => <tr>
+                    <td>{el.evaluatorName}</td>
+                    <td>{el.evaluatorPosition}</td>
+                    <td>{el.evaluatorDivision}</td>
+                    <td>{el.evaluatorDepartment}</td>
+                    <td>{el.evaluatorTeam}</td>
+                    <td>{el.evaluatorEmail}</td>
+                    <td>{el.evaluatorMobile}</td>
+                    <td>{el.isSigned}</td>
+                    <td>{el.isCompleted}</td>
+                    <td>{Math.round(el.isCompleted / el.isSigned * 100)}</td>
+                </tr>)}
+            </tbody>
+        </table>
     </div>
 }
 
@@ -35,15 +82,16 @@ function ProjectDetail () {
         })
         .then((res) => {
             console.log(res.data);
+            alert('프로젝트를 성공적으로 완료하였습니다');
         });
     }
 
     const handleStartProject = () => {
-
+        alert('아직 기능 구현 전입니다');
     }
 
     const handleDownloadResult = () => {
-
+        alert('아직 기능 구현 전입니다');
     }
 
     const handleRemoveProject = async () => {
@@ -52,6 +100,7 @@ function ProjectDetail () {
         })
         .then((res) => {
             console.log(res.data);
+            alert('프로젝트를 성공적으로 삭제하였습니다')
         });
         history.push('/admin');
     }
