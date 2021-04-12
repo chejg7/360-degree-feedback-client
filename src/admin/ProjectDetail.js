@@ -3,19 +3,20 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import styles from './ProjectDetail.module.css';
 
-function Responses (props) {
-    const [responses, setResponses] = useState([]);
-    console.log('프로젝트 타이틀', props.projectTitle)
+function Responses ({responses}) {
+    //응답을 본 컴포넌트가 아니라 상위 컴포넌트에서 읽어와서 프롭스로 전달하는 것으로 로직 변경
+    // const [responses, setResponses] = useState([]);
+    // console.log('프로젝트 타이틀', props.projectTitle)
 
-    useEffect(async () => {
-        await axios.post('http://localhost:4000/responses', {
-            projectTitle: props.projectTitle
-        })
-        .then(res => {
-            console.log('받아온 응답 데이터', res.data)
-            setResponses(res.data);
-        });
-    }, [])
+    // useEffect(async () => {
+    //     await axios.post('http://localhost:4000/responses', {
+    //         projectTitle: props.projectTitle
+    //     })
+    //     .then(res => {
+    //         console.log('받아온 응답 데이터', res.data)
+    //         setResponses(res.data);
+    //     });
+    // }, [])
 
     const list = responses.reduce((acc, cur) => {
         const idx = acc.findIndex(el => el.evaluatorEmail === cur.evaluatorEmail);
@@ -76,6 +77,18 @@ function ProjectDetail () {
     console.log('넘어온 개별 프로젝트 데이터', project);
     console.log('넘어온 전체 프로젝트 데이터', projects);
 
+    const [responses, setResponses] = useState([]);
+
+    useEffect(async () => {
+        await axios.post('http://localhost:4000/responses', {
+            projectTitle: project.projectTitle
+        })
+        .then(res => {
+            console.log('받아온 응답 데이터', res.data)
+            setResponses(res.data);
+        });
+    }, [])
+
     const handleFinishProject = async () => {
         await axios.post('http://localhost:4000/project/finish', {
             projectTitle: project.projectTitle
@@ -86,11 +99,18 @@ function ProjectDetail () {
         });
     }
 
-    const handleStartProject = () => {
-        alert('아직 기능 구현 전입니다');
+    const handleRestartProject = async () => {
+        await axios.post('http://localhost:4000/project/restart', {
+            userInfo: project.userInfo,
+            projectTitle: project.projectTitle
+        })
+        .then((res) => {
+            console.log(res.data);
+            alert('프로젝트를 성공적으로 재시작하였습니다');
+        })
     }
 
-    const handleDownloadResult = () => {
+    const handleDownloadResult = async () => {
         alert('아직 기능 구현 전입니다');
     }
 
@@ -112,7 +132,7 @@ function ProjectDetail () {
                 <button>리스트로 돌아가기</button>
             </Link>
             <button onClick={handleFinishProject}>프로젝트 완료</button>
-            <button onClick={handleStartProject}>프로젝트 재시작</button>
+            <button onClick={handleRestartProject}>프로젝트 재시작</button>
             <button onClick={handleDownloadResult}>결과 다운로드</button>
             <button onClick={handleRemoveProject}>프로젝트 삭제</button>
             <h3>{project.projectTitle}</h3>
@@ -135,7 +155,8 @@ function ProjectDetail () {
                 </tr>
             </table>
             </div>
-        <Responses projectTitle={project.projectTitle} />
+        {/* <Responses projectTitle={project.projectTitle} /> */}
+        <Responses responses={responses} />
         </div>
     )
 };

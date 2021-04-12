@@ -54,7 +54,6 @@ function ProjectList() {
         <Link to='/admin/create-project'>
             <button>프로젝트 등록</button>
         </Link>
-        //진단자 매칭 기능 구현 전
         {/* <Link to='/admin/matching-users'>
             <button>진단자 매칭</button>
         </Link> */}
