@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect, useHistory, BrowserRouter as Router } from 'react-router-dom';
+import axios from 'axios';
 import Login from './Login';
 import LoginBar from './LoginBar';
 import Admin from './admin/Admin';
@@ -9,16 +10,23 @@ import User from './user/User';
 function App() {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory();
 
   const handleResponseSuccess = (userInfo) => {
     setUser(userInfo);
     setIsLoggedIn(true);
   }
 
-  const handleLogout = () => {
-    setUser(null);
-    setIsLoggedIn(false);
+  const handleLogout = async () => {
+    await axios.post("http://localhost:4000/logout")
+    .then((res) => {
+      console.log(res);
+      setUser(null);
+      setIsLoggedIn(false);
+      history.push('/');
+    });
   }
+
 
   // if (!isLoggedIn) {
   //   return <Login handleResponseSuccess={handleResponseSuccess}/>
