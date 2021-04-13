@@ -50,14 +50,16 @@ function ProjectList() {
         console.log('프로젝트 데이터', projects);
     },[])
 
-    return <>
-        <Link to='/admin/create-project'>
-            <button>프로젝트 등록</button>
-        </Link>
-        {/* <Link to='/admin/matching-users'>
-            <button>진단자 매칭</button>
-        </Link> */}
-        <h3>진단 프로젝트 리스트</h3>
+    return <div className={styles.container}>
+        <div className={styles.title}>
+            <h3>진단 프로젝트 리스트</h3>
+            <Link to='/admin/create-project'>
+                <button>프로젝트 등록</button>
+            </Link>
+            {/* <Link to='/admin/matching-users'>
+                <button>진단자 매칭</button>
+            </Link> */}
+        </div>
         {!isLoaded ? <div>진단 데이터를 읽어오는 중입니다...</div> : (
             projects.length === 0 ? <div>현재 등록된 진단 프로젝트가 없습니다</div> :
             <table className={styles.table}>
@@ -82,7 +84,7 @@ function ProjectList() {
             </table>
             )
         }
-    </>
+    </div>
 }
 
 export default ProjectList;

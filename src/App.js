@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Redirect, useHistory, BrowserRouter as Router } from 'react-router-dom';
 import Login from './Login';
+import LoginBar from './LoginBar';
 import Admin from './admin/Admin';
 import Manager from './user/Manager';
 import User from './user/User';
@@ -34,6 +35,7 @@ function App() {
 
   return (
     <div className="App">
+      {isLoggedIn && <LoginBar user={user} handleLogout={handleLogout} />}
       <Router>
       <Route
           path='/'
@@ -61,19 +63,19 @@ function App() {
         <Route
           exact path='/admin'
           render={() => (
-            <Admin user={user} handleLogout={handleLogout} />
+            <Admin user={user} />
           )}
         />
         <Route
           exact path='/manager'
           render={() => (
-            <Manager user={user} handleLogout={handleLogout} />
+            <Manager user={user} />
           )}
         />
         <Route
           exact path='/user'
           render={() => (
-            <User user={user} handleLogout={handleLogout} />
+            <User user={user} />
           )}
         />
       </Router>

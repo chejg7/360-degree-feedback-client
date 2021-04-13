@@ -11,7 +11,6 @@ function Admin ({user}) {
     return (
         <>
         <Router>
-            <h1>Admin</h1>
             <Route exact path='/admin/create-project' component={CreateProject} />
             <Route exact path='/admin/create-survey' component={CreateSurvey} />
             <Route exact path='/admin/matching-users' component={MatchingUsers} />

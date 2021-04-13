@@ -1,4 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+.container {
+    width: 80%;
+    margin-left: 10%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        width: 100%;
+    }
+}
+
 .table {
+    width: 100%;
     border-collapse: collapse;
     text-align: center;
     font-size: 12px;
@@ -14,4 +29,28 @@
 .table td {
     padding: 5px;
     border-bottom: 1px solid #999;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title h3 {
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.title button {
+    color: white;
+    border: none;
+    background-color: #008b8b;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.title button:hover {
+    background-color: #008b8b71;
+    cursor: pointer;
 }
