@@ -86,12 +86,13 @@ function CreateProject() {
         handleSubmit();
     }
 
-    return <>
-        <Link to='/admin'>
+    return <div className={styles.container}>
+        {/* <Link to='/admin'>
             <button>리스트로 돌아가기</button>
-        </Link>
-        <h3>프로젝트 등록</h3>
+        </Link> */}
+        
         <form onSubmit={onSubmit} className={styles.createForm}>
+            <h3>프로젝트 등록</h3>
             <div>
                 <label>프로젝트명</label>
                     <input 
@@ -186,7 +187,7 @@ function CreateProject() {
                 <button>등록하기</button>
             </div>
         </form>
-        </>
+        </div>
 }
 
 export default CreateProject;

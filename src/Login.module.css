@@ -37,27 +37,31 @@
 
 .loginForm {
     width: 250px;
-    padding: 10px 10px 10px 10px;
-    background-color: rgb(231, 231, 241);
+    padding: 10px;
+    /* background-color: rgb(248, 248, 253); */
+    /* background-color: #f2f2f2; */
     box-shadow: rgb(0 0 0 / 10%) 0px 2px 8px 0px;
-    border: rgb(224, 224, 224);
+    border: 1px solid #ccc;
     border-radius: 8px;
 }
 
 .inputArea input {
     width: 240px;
     border: none;
-    background-color: rgba(203, 212, 233, 0.966);
-    border-bottom: 1px solid #999;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
     padding: 5px;
     margin-bottom: 8px;
+    font-size: x-small;
 }
 
 .inputArea label {
-    font-size: 12px;
+    font-size: xx-small;
 }
 
 .inputArea button {
+    font-size: small;
     width: 250px;
     border: none;
     color: white;
@@ -72,7 +76,7 @@
 
 .caption {
     text-align: center;
-    font-size: 12px;
+    font-size: xx-small;
     border-top: 1px solid #999;
     padding-top: 5px;
     margin-bottom: 5px;
@@ -83,6 +87,7 @@
 }
 
 .caption button {
+    font-size: x-small;
     width: 250px;
     border: none;
     color: white;

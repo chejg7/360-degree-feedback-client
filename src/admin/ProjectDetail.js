@@ -4,7 +4,7 @@ import axios from 'axios';
 import XLSX from 'xlsx';
 import styles from './ProjectDetail.module.css';
 
-function Responses ({responses}) {
+function Responses ({ list, handleDownloadResult }) {
     //응답을 본 컴포넌트가 아니라 상위 컴포넌트에서 읽어와서 프롭스로 전달하는 것으로 로직 변경
     // const [responses, setResponses] = useState([]);
     // console.log('프로젝트 타이틀', props.projectTitle)
@@ -19,27 +19,15 @@ function Responses ({responses}) {
     //     });
     // }, [])
 
-    const list = responses.reduce((acc, cur) => {
-        const idx = acc.findIndex(el => el.evaluatorEmail === cur.evaluatorEmail);
-        
-        if (idx > -1) {
-            acc[idx].isSigned++;
-            if (cur.response) acc[idx].isCompleted++;
-        } else {
-            const copied = {...cur};
-            copied.isSigned = 1;
-            copied.isCompleted = cur.response ? 1 : 0;
-            acc.push(copied);
-        }
-
-        return acc;
-    }, [])
-
-    return <div>
-        <h5>진단 참여자 리스트</h5>
+    return <div className={styles.container}>
+        <div className={styles.listTitle}>
+            <div>진단 참여자 리스트</div>
+            <button onClick={handleDownloadResult}>결과 다운로드</button>
+        </div>
         <table className={styles.list}>
             <thead>
                 <tr>
+                    <th>번호</th>
                     <th>이름</th>
                     <th>직위</th>
                     <th>본부</th>
@@ -53,7 +41,8 @@ function Responses ({responses}) {
                 </tr>
             </thead>
             <tbody>
-                {list.map(el => <tr>
+                {list.map((el, idx) => <tr>
+                    <td>{idx + 1}</td>
                     <td>{el.evaluatorName}</td>
                     <td>{el.evaluatorPosition}</td>
                     <td>{el.evaluatorDivision}</td>
@@ -111,7 +100,7 @@ function ProjectDetail () {
         })
     }
 
-    const handleDownloadResult = async () => {
+    const handleDownloadResult = () => {
         const newResponses = responses.map(res => {
             const newObj = {...res};
             if (res.response) {
@@ -121,7 +110,6 @@ function ProjectDetail () {
                     newObj[key] = val;
                 }
             }
-
             return newObj;
         })
         console.log('엑셀로 저장하기 위한 json', newResponses);
@@ -130,6 +118,30 @@ function ProjectDetail () {
         XLSX.utils.book_append_sheet(workbook, newWorksheet, 'DATA');
         XLSX.writeFile(workbook, '진단 결과 데이터.xlsx');
     }
+
+    const list = responses.reduce((acc, cur) => {
+        const idx = acc.findIndex(el => el.evaluatorEmail === cur.evaluatorEmail);
+        
+        if (idx > -1) {
+            acc[idx].isSigned++;
+            if (cur.response) acc[idx].isCompleted++;
+        } else {
+            const copied = {...cur};
+            copied.isSigned = 1;
+            copied.isCompleted = cur.response ? 1 : 0;
+            acc.push(copied);
+        }
+
+        return acc;
+    }, []);
+    console.log('리스트 정보', list);
+    
+    let isCompletedSum = 0;
+    let isSignedSum = 0;
+    for (let el of list) {
+        isCompletedSum = isCompletedSum + el.isCompleted;
+        isSignedSum = isSignedSum + el.isSigned;
+    };
 
     const handleRemoveProject = async () => {
         await axios.post('http://localhost:4000/project/remove', {
@@ -145,35 +157,47 @@ function ProjectDetail () {
     return (
         <div>
             <div className={styles.container}>
-            <Link to='/admin'>
-                <button>리스트로 돌아가기</button>
-            </Link>
-            <button onClick={handleFinishProject}>프로젝트 완료</button>
-            <button onClick={handleRestartProject}>프로젝트 재시작</button>
-            <button onClick={handleDownloadResult}>결과 다운로드</button>
-            <button onClick={handleRemoveProject}>프로젝트 삭제</button>
-            <h3>{project.projectTitle}</h3>
+                {/* <div className={styles.backBtn}>
+                    <Link to='/admin'>
+                        <button>Back</button>
+                    </Link>
+                </div> */}
+            
+            <div className={styles.projectTitle}>
+                <div>{project.projectTitle}</div>
+                <div className={styles.titleBtn}>
+                    <button onClick={handleFinishProject}>프로젝트 완료</button>
+                    <button onClick={handleRestartProject}>프로젝트 재시작</button>
+                    <button onClick={handleRemoveProject}>프로젝트 삭제</button>
+                </div>
+            </div>
             <table className={styles.table}>
-                <tr>
-                    <th>기업명</th>
-                    <td>{project.company}</td>
-                </tr>
-                <tr>
-                    <th>관리자 이름</th>
-                    <td>{project.managerName}</td>
-                </tr>
-                <tr>
-                    <th>관리자 이메일</th>
-                    <td>{project.managerEmail}</td>
-                </tr>
-                <tr>
-                    <th>관리자 휴대폰</th>
-                    <td>{project.managerMobile}</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>기업명</th>
+                        <th>관리자 이름</th>
+                        <th>관리자 이메일</th>
+                        <th>관리자 휴대폰</th>
+                        <th>진단 참여인원</th>
+                        <th>전체 참여율(%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{project.company}</td>
+                        <td>{project.managerName}</td>
+                        <td>{project.managerEmail}</td>
+                        <td>{project.managerMobile}</td>
+                        <td>{list.length}</td>
+                        <td>{Math.round(isCompletedSum / isSignedSum * 100)}</td>
+                    </tr>
+                </tbody>
             </table>
             </div>
         {/* <Responses projectTitle={project.projectTitle} /> */}
-        <Responses responses={responses} />
+        {!responses.length ? 
+            <div className={styles.caption}>진단 참여자 정보를 읽어오는 중입니다...</div> : 
+            <Responses list={list} handleDownloadResult={handleDownloadResult} />}
         </div>
     )
 };

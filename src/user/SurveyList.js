@@ -27,7 +27,7 @@ function SurveyItem (props) {
         <td>{evaluated.response ? evaluated.updatedAt.substring(0, 19) : '미완료'}</td>
         <td>{evaluated.response ? 
             <button className={styles.restartButton} onClick={handleClick}>다시하기</button>
-            : <button onClick={handleClick}>진단하기</button>}
+            : <button className={styles.button} onClick={handleClick}>진단하기</button>}
         </td>
         {/* <td><button onClick={handleClick}>
                 {evaluated.response ? '다시하기' : '진단하기'}
@@ -49,9 +49,9 @@ function SurveyList ({user}) {
         setProjects(result.data);
     },[]);
 
-    return <div>
+    return <div className={styles.container}>
         {projects.map((project) => <div>
-            <h4>{project.projectTitle}</h4>
+            <div className={styles.title}>{project.projectTitle}</div>
             <table className={styles.table}>
                 <thead>
                     <tr>

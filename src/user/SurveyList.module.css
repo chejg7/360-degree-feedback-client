@@ -1,14 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+.container {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 5%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.title {
+    font-size: medium;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 .table {
     border-collapse: collapse;
+    width: 100%;
     text-align: center;
-    font-size: 12px;
+    font-size: x-small;
 }
 
 .table th {
     font-weight: bold;
     color: #369;
-    border-bottom: 3px solid #036;
-    padding: 10px;
+    border-top: 3px solid #036;
+    border-bottom: 2px solid #999;
+    padding: 8px;
+    background: #f3f6f7;
 }
 
 .table td {
@@ -16,7 +34,31 @@
     border-bottom: 1px solid #999;
 }
 
+.button {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: x-small;
+    font-weight: bold;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(221, 217, 217);
+}
+
 .restartButton {
-    background-color: grey;
+    background-color: gray;
     color: white;
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: x-small;
+    font-weight: bold;
+}
+
+.restartButton:hover {
+    cursor: pointer;
+    background-color: rgb(187, 179, 179);
 }

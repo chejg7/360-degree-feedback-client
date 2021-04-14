@@ -1,10 +1,73 @@
+.container {
+    width: 80%;
+    margin-left: 10%;
+}
+
+.backBtn button {
+    border: 1px solid;
+    border-radius: 3px;
+    font-size: x-small;
+}
+
+.backBtn button:hover {
+    cursor: pointer;
+    background-color:rgba(82, 90, 90, 0.685);
+}
+
+.projectTitle {
+    display: flex;
+    justify-content: space-between;
+    font-size: small;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+
+.titleBtn button {
+    border: none;
+    margin-left: 5px;
+    color: white;
+    background-color: #aeacb3;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: x-small;
+}
+
+.titleBtn button:hover {
+    background-color: rgba(82, 90, 90, 0.685);
+    cursor: pointer;
+}
+
+.listTitle {
+    display: flex;
+    justify-content: space-between;
+    font-size: small;
+    font-weight: bold;
+    margin-top: 5%;
+    margin-bottom: 1%;
+}
+
+.listTitle button {
+    border: none;
+    color: white;
+    background-color: #008b8b;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: x-small;
+}
+
+.listTitle button:hover {
+    background-color: #008b8b71;
+    cursor: pointer;
+}
+
 .table {
     border-collapse: collapse;
-    text-align: left;
+    text-align: center;
     line-height: 1.5;
     border-top: 3px solid #036;
     border-bottom: 1px solid #036;
-    font-size: 12px;
+    font-size: x-small;
 }
 
 .table th {
@@ -26,17 +89,25 @@
 .list {
     border-collapse: collapse;
     text-align: center;
-    font-size: 10px;
+    font-size: x-small;
 }
 
 .list th {
     font-weight: bold;
     color: #369;
-    border-bottom: 3px solid #036;
-    padding: 10px;
+    border-top: 3px solid #036;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+    padding: 3px;
 }
 
 .list td {
     padding: 5px;
     border-bottom: 1px solid #999;
+}
+
+.caption {
+    margin: 20px;
+    text-align: center;
+    font-size: small;
 }

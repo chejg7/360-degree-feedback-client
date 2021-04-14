@@ -1,13 +1,25 @@
+.container {
+    width: 80%;
+    margin-left: 10%;
+}
+
 .createForm {
-    width: 350px;   
-    font-size: 14px;
-    border-top: 3px solid #036;
-    border-bottom: 1px solid #036;
-    padding: 5px
+    width: 350px;
+    padding: 10px;
+    box-shadow: rgb(0 0 0 / 10%) 0px 2px 8px 0px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.createForm h3 {
+    font-size: small;
+    text-align: center;
 }
 
 .createForm label {
     display: inline-block;
+    font-size: x-small;
+    font-weight: bold;
     width: 100px;
     padding: 5px;
 }
@@ -16,6 +28,7 @@
     width: 200px;
     border: 1px solid #ccc;
     padding: 5px;
+    font-size: x-small;
 }
 
 .createForm button {
@@ -26,6 +39,7 @@
     padding: 5px;
     margin-top: 5px;
     margin-left: 110px;
+    font-size: x-small;
 }
 
 .createForm button:hover {

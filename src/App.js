@@ -9,12 +9,10 @@ import User from './user/User';
 
 function App() {
   const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const history = useHistory();
 
   const handleResponseSuccess = (userInfo) => {
     setUser(userInfo);
-    setIsLoggedIn(true);
   }
 
   const handleLogout = async () => {
@@ -22,8 +20,6 @@ function App() {
     .then((res) => {
       console.log(res);
       setUser(null);
-      setIsLoggedIn(false);
-      history.push('/');
     });
   }
 
@@ -43,12 +39,12 @@ function App() {
 
   return (
     <div className="App">
-      {isLoggedIn && <LoginBar user={user} handleLogout={handleLogout} />}
+      {user && <LoginBar user={user} handleLogout={handleLogout} />}
       <Router>
       <Route
           path='/'
           render={() => {
-            if (!isLoggedIn) {
+            if (!user) {
               return <Redirect to='/login' />
             } else {
               switch (user.role[0]) {

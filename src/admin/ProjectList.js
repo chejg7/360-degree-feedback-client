@@ -22,7 +22,7 @@ function ProjectItem(props) {
     return (
         <>
         <tr>
-            <td>{idx}</td>
+            <td>{idx + 1}</td>
                 <td>{project.projectTitle}</td>
                 <td>{project.company}</td>
                 <td>{project.managerName}</td>
@@ -50,9 +50,10 @@ function ProjectList() {
         console.log('프로젝트 데이터', projects);
     },[])
 
-    return <div className={styles.container}>
+    return  <div>
+        <div className={styles.container}>
         <div className={styles.title}>
-            <h3>진단 프로젝트 리스트</h3>
+            <div>진단 프로젝트 리스트</div>
             <Link to='/admin/create-project'>
                 <button>프로젝트 등록</button>
             </Link>
@@ -62,6 +63,7 @@ function ProjectList() {
         </div>
         {!isLoaded ? <div>진단 데이터를 읽어오는 중입니다...</div> : (
             projects.length === 0 ? <div>현재 등록된 진단 프로젝트가 없습니다</div> :
+            <div>
             <table className={styles.table}>
                 <thead>
                     <tr>
@@ -82,8 +84,11 @@ function ProjectList() {
                     ))}
                 </tbody>
             </table>
+            <div className={styles.caption}>현재 등록된 진단이 {projects.length} 건 있습니다.</div>
+            </div>
             )
         }
+    </div>
     </div>
 }
 

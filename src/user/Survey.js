@@ -136,9 +136,8 @@ function Survey (props) {
         console.log('상태값', response);
     }
 
-    return <div>
-        <h3>Survey</h3>
-        <button onClick={handleClickBack}>리스트로 돌아가기</button>
+    return <div className={styles.container}>
+        {/* <button onClick={handleClickBack}>Back</button> */}
         <h5>진단 대상자 : {evaluated.evaluatedName}</h5>
         <table className={styles.table}>
             <thead>
