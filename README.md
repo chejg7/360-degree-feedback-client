@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# 프로젝트 설명
+본 프로젝트는 조직 내 구성원들에 대한 360도 다면평가를 수행할 수 있는 웹앱을 개발하기 위한 것입니다. 
+기업에서 쉽게 활용할 수 있는 다양한 진단 도구들이 이미 많이 나와있지만, 다면평가를 수행하는 데 있어서는 몇 가지 어려움들이 존재합니다. 본 프로젝트에서 해결하고자 한 기존 진단 도구들의 문제들은 다음과 같습니다.
+1. 진단 종류 및 진단 대상자를 특정할 수 없다. 
+2. 진단 참여자는 진단 문항에 답변을 할 뿐 그 이상의 정보 확인 등의 기능이 없다. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+본 프로젝트는 이러한 문제를 해결하고자 아래와 같은 기능적 목표를 가지고 있습니다. 
+1. 각 진단은 진단 대상자와 진단 참여자에 대한 매핑 정보를 가지고 있다. (각 진단마다 누구에 대한 평가인지 확인할 수 있다)
+2. 진단 대상자에 따라 어떤 진단을 수행할 것인지 선택할 수 있다. 
+3. 진단 참여자는 자신이 어떤 진단에 참여해야 하는지 한번에 확인할 수 있다. 
+4. 각 진단에 참여할 때 누구에 대한 진단인지 확인하고 참여할 수 있다. 
+***
+# 기술 스택
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Front-end
+• React / Hooks, JavaScript, HTML, CSS
+## Back-end
+• Express, Node.js
+## Deployment
+• AWS EC2, RDS, S3
+***
+# 기능 구성
+![프로젝트 구성](public/프로젝트 구성.jpg)
