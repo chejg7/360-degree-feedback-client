@@ -44,7 +44,7 @@ function ProjectList() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(async () => {
-        const result = await axios.get('http://localhost:4000/project');
+        const result = await axios.get(process.env.REACT_APP_URL + '/project');
         setProjects(result.data);
         setIsLoaded(true);
         console.log('프로젝트 데이터', projects);

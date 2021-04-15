@@ -70,7 +70,7 @@ function ProjectDetail () {
     const [responses, setResponses] = useState([]);
 
     useEffect(async () => {
-        await axios.post('http://localhost:4000/responses', {
+        await axios.post('http://ec2-3-35-210-192.ap-northeast-2.compute.amazonaws.com:3000/responses', {
             projectTitle: project.projectTitle
         })
         .then(res => {
@@ -80,7 +80,7 @@ function ProjectDetail () {
     }, [])
 
     const handleFinishProject = async () => {
-        await axios.post('http://localhost:4000/project/finish', {
+        await axios.post('http://ec2-3-35-210-192.ap-northeast-2.compute.amazonaws.com:3000/project/finish', {
             projectTitle: project.projectTitle
         })
         .then((res) => {
@@ -90,7 +90,7 @@ function ProjectDetail () {
     }
 
     const handleRestartProject = async () => {
-        await axios.post('http://localhost:4000/project/restart', {
+        await axios.post('http://ec2-3-35-210-192.ap-northeast-2.compute.amazonaws.com:3000/project/restart', {
             userInfo: project.userInfo,
             projectTitle: project.projectTitle
         })
@@ -144,7 +144,7 @@ function ProjectDetail () {
     };
 
     const handleRemoveProject = async () => {
-        await axios.post('http://localhost:4000/project/remove', {
+        await axios.post(process.env.REACT_APP_URL + '/project/remove', {
             projectTitle: project.projectTitle
         })
         .then((res) => {

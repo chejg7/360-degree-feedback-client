@@ -113,7 +113,7 @@ function Survey (props) {
             }
         }
         if (fullQuestions.length === response.length) {
-            await axios.post('http://localhost:4000/users/response', {
+            await axios.post(process.env.REACT_APP_URL + '/users/response', {
                 evaluated: evaluated, 
                 data: response
             })

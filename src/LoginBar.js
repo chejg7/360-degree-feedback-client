@@ -10,11 +10,11 @@ function LoginBar (props) {
     return <div className={styles.wrapper}>
         <div className={styles.container}>
             <div className={styles.title}>
-                <FcSurvey size={20} />
+                <FcSurvey size={30} />
                 <div>360도 다면평가</div>
             </div>
             <div className={styles.user}>
-                <div><AiOutlineUser />  {user.name} 님</div>
+                <div><AiOutlineUser size={20}/>  {user.name} 님</div>
                 <button onClick={handleLogout}>Logout</button>
             </div>
         </div>

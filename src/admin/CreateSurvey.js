@@ -9,7 +9,7 @@ function CreateSurvey() {
     const [questions, setQuestions] = useState('');
 
     const handleSubmit = async () => {
-        await axios.post('http://localhost:4000/createsurvey', {
+        await axios.post(process.env.REACT_APP_URL + '/createsurvey', {
             title: title,
             questions: questions
         })

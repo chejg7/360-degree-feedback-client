@@ -16,7 +16,7 @@ function App() {
   }
 
   const handleLogout = async () => {
-    await axios.post("http://localhost:4000/logout")
+    await axios.post(process.env.REACT_APP_URL + '/logout')
     .then((res) => {
       console.log(res);
       setUser(null);

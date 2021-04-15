@@ -8,7 +8,7 @@ function Manager ({user}) {
 
     useEffect(async () => {
         console.log(user)
-        const result = await axios.post('http://localhost:4000/users/project', {
+        const result = await axios.post(process.env.REACT_APP_URL + '/users/project', {
             email: user.email,
             projectTitle: user.projectTitle
         });
