@@ -32,7 +32,7 @@ function Login (props) {
     }
 
     const handleAdminTestLogin = async () => {
-        await axios.post('http://ec2-3-35-210-192.ap-northeast-2.compute.amazonaws.com:3000/login', {
+        await axios.post(process.env.REACT_APP_URL + '/login', {
             email: 'admin@test.com',
             password: 'cmoecodestates2021'
         })
@@ -44,9 +44,9 @@ function Login (props) {
     }
 
     const handleUserTestLogin = async () => {
-        await axios.post('http://ec2-3-35-210-192.ap-northeast-2.compute.amazonaws.com:3000/login', {
-            email: 'AITASKIM@shinhan.com',
-            password: 'cmoe2021'
+        await axios.post(process.env.REACT_APP_URL + '/login', {
+            email: 'kimyisa@test.com',
+            password: 'test10'
         })
         .then((res) => {
             props.handleResponseSuccess(res.data);

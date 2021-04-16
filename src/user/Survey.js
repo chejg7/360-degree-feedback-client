@@ -22,7 +22,7 @@ function Question (props) {
     }
 
     return <div>
-        <h5>{survey}</h5>
+        <h3>{survey}</h3>
         {splitedQuestions.map((question) => 
             <form className={styles.form}>
                 <div className={styles.text}>
@@ -138,7 +138,7 @@ function Survey (props) {
 
     return <div className={styles.container}>
         {/* <button onClick={handleClickBack}>Back</button> */}
-        <h5>진단 대상자 : {evaluated.evaluatedName}</h5>
+        <h3>진단 대상자 : {evaluated.evaluatedName}</h3>
         <table className={styles.table}>
             <thead>
                 <tr>
